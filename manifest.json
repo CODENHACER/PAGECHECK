@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "PAGECHECK",
+  "version": "1.0.0",
+  "description": "Comprueba con un clic la seguridad de la página que visitas y te lo explica en lenguaje claro.",
+  "homepage_url": "https://github.com/CODENHACER/pagecheck",
+  "minimum_chrome_version": "116",
+  "permissions": ["cookies", "scripting", "storage", "contentSettings"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "PAGECHECK: comprobar esta página",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

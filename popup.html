@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PAGECHECK</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="marca">
+      <span class="logo" aria-hidden="true">✓</span>
+      <h1>PAGECHECK</h1>
+    </div>
+    <p class="eslogan">Comprueba la seguridad de la página de un clic</p>
+    <p id="dominio" class="dominio"></p>
+  </header>
+
+  <button id="btn" class="primario">Comprobar esta página</button>
+
+  <div class="leyenda">
+    <span class="v-ok">Seguro</span>
+    <span class="v-warn">Revisar</span>
+    <span class="v-bad">Peligro</span>
+    <span class="v-unknown">No comprobado</span>
+  </div>
+
+  <section id="resultado" hidden>
+    <article id="sobre" class="tarjeta" hidden>
+      <h2>Sobre esta página</h2>
+      <p id="sobre-titulo" class="sobre-titulo"></p>
+      <p id="sobre-desc" class="sobre-desc"></p>
+      <p id="sobre-meta" class="sobre-meta"></p>
+    </article>
+
+    <div id="semaforo" class="semaforo">
+      <div id="icono" class="luz"></div>
+      <div>
+        <strong id="veredicto"></strong>
+        <p id="resumen"></p>
+      </div>
+    </div>
+
+    <div id="secciones"></div>
+  </section>
+
+  <p id="estado" class="estado"></p>
+
+  <details class="consejos">
+    <summary>Consejos de uso</summary>
+    <ul>
+      <li>Revisa el nombre exacto del dominio antes de escribir datos: los fraudes usan direcciones casi idénticas.</li>
+      <li>El candado (HTTPS) indica que la conexión está cifrada, pero no que la web sea de confianza.</li>
+      <li>Si una página te dice que tu PC tiene un virus y te pide llamar o instalar algo, ciérrala. Es una estafa habitual.</li>
+      <li>No descargues programas de enlaces que no conozcas. Pásalos siempre por tu antivirus.</li>
+      <li>Bloquea las ventanas emergentes en Chrome: Configuración, Privacidad y seguridad, Configuración de sitios.</li>
+      <li>PAGECHECK analiza la pestaña activa. Vuelve a pulsar "Comprobar" cada vez que cambies de página.</li>
+    </ul>
+  </details>
+
+  <footer>
+    <a href="#" id="opciones">Opciones</a> · Comprobación orientativa. No sustituye a tu antivirus.
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
