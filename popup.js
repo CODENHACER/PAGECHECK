@@ -261,6 +261,26 @@ async function comprobarSafeBrowsing(url) {
   }
 }
 
+// Búsqueda local en la lista de URLhaus guardada por background.js.
+// Mira el dominio completo y sus dominios padre (la lista bloquea sitios enteros).
+async function consultarURLhaus(hostname) {
+  const { urlhaus } = await chrome.storage.local.get('urlhaus');
+  if (!urlhaus || !urlhaus.dominios || !urlhaus.dominios.length) {
+    return { disponible: false };
+  }
+  const conjunto = new Set(urlhaus.dominios);
+  const partes = hostname.split('.');
+  let coincidencia = null;
+  for (let i = 0; i < partes.length - 1; i++) {
+    const candidato = partes.slice(i).join('.');
+    if (conjunto.has(candidato)) {
+      coincidencia = candidato;
+      break;
+    }
+  }
+  return { disponible: true, coincidencia, actualizado: urlhaus.actualizado };
+}
+
 // Ajuste de Chrome para ventanas emergentes de esta web ('allow' o 'block')
 async function comprobarPopups(url) {
   try {
@@ -288,7 +308,7 @@ function resumenCookies(cookies) {
 
 // ---------- Construcción de los resultados en lenguaje claro ----------
 
-function construirChequeos({ url, pagina, cookies, conexion, ip, fecha, seguridad, popups }) {
+function construirChequeos({ url, pagina, cookies, conexion, ip, fecha, seguridad, urlhaus, popups }) {
   const c = [];
   const add = (seccion, nivel, titulo, texto) => c.push({ seccion, nivel, titulo, texto });
   const https = url.protocol === 'https:';
@@ -325,6 +345,22 @@ function construirChequeos({ url, pagina, cookies, conexion, ip, fecha, segurida
   } else {
     add('archivos', 'ok', 'Sin alertas de Google',
       'La página no aparece en las listas de amenazas de Google Safe Browsing, la misma base que usa Chrome para avisarte.');
+  }
+
+  if (!urlhaus.disponible) {
+    add('archivos', 'unknown', 'Lista de URLhaus',
+      'Todavía no se ha descargado la lista pública de URLhaus. La extensión la descarga sola en segundo plano; vuelve a comprobar más tarde.');
+  } else {
+    const fechaLista = urlhaus.actualizado
+      ? new Date(urlhaus.actualizado).toLocaleString('es-ES')
+      : 'desconocida';
+    if (urlhaus.coincidencia) {
+      add('archivos', 'bad', 'Aparece en la lista de URLhaus',
+        `El dominio ${urlhaus.coincidencia} figura en la lista pública de URLhaus, que recoge sitios usados para distribuir malware. Lista del ${fechaLista}. Evita abrirla y no descargues nada de ella. Las listas comunitarias también pueden tener errores.`);
+    } else {
+      add('archivos', 'ok', 'No aparece en la lista de URLhaus',
+        `Comprobado contra la lista del ${fechaLista}. Una web muy reciente puede no aparecer todavía.`);
+    }
   }
 
   if (!pagina) {
@@ -543,7 +579,7 @@ async function comprobar() {
     const url = new URL(tab.url);
     $('dominio').textContent = url.hostname;
 
-    const [pagina, cookies, conexion, ip, fecha, seguridad, popups] = await Promise.all([
+    const [pagina, cookies, conexion, ip, fecha, seguridad, popups, urlhaus] = await Promise.all([
       escanearPagina(tab.id),
       chrome.cookies.getAll({ url: tab.url }).catch(() => []),
       comprobarConexion(tab.url),
@@ -551,9 +587,10 @@ async function comprobar() {
       consultarDominio(url.hostname),
       comprobarSafeBrowsing(tab.url),
       comprobarPopups(tab.url),
+      consultarURLhaus(url.hostname),
     ]);
 
-    mostrar(construirChequeos({ url, pagina, cookies, conexion, ip, fecha, seguridad, popups }), pagina);
+    mostrar(construirChequeos({ url, pagina, cookies, conexion, ip, fecha, seguridad, urlhaus, popups }), pagina);
     estado('');
   } catch (e) {
     estado(`No se pudo completar la comprobación: ${e.message}`);

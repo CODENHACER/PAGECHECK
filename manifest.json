@@ -1,11 +1,14 @@
 {
   "manifest_version": 3,
   "name": "PAGECHECK",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Comprueba con un clic la seguridad de la página que visitas y te lo explica en lenguaje claro.",
-  "homepage_url": "https://github.com/CODENHACER/pagecheck",
+  "homepage_url": "https://github.com/CODENHACER/PAGECHECK",
   "minimum_chrome_version": "116",
-  "permissions": ["cookies", "scripting", "storage", "contentSettings"],
+  "permissions": ["alarms", "cookies", "scripting", "storage", "contentSettings"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_title": "PAGECHECK: comprobar esta página",
