@@ -21,7 +21,8 @@ background.js    Service worker: descarga la lista de URLhaus
 popup.js        Comprobaciones y lógica de presentación
 options.html/js Página de opciones (clave de API)
 icons/          Iconos 16, 48 y 128 px
-PRIVACY.md      Política de privacidad
+privacy.html   Política de privacidad (generada desde PRIVACY.md)
+PRIVACY.md      Fuente de la política de privacidad
 ```
 
 ## Permisos y justificación (para Chrome Web Store)
@@ -39,7 +40,7 @@ Finalidad única: informar al usuario sobre el nivel de seguridad de la página 
 
 ## Publicación en Chrome Web Store: checklist
 
-- [ ] Sustituir el correo de contacto en `PRIVACY.md`.
+- [x] Correo de contacto en `PRIVACY.md` actualizado.
 - [ ] Publicar el repositorio en GitHub y usar la URL de `PRIVACY.md` como política de privacidad en el panel de desarrollador.
 - [ ] Justificar cada permiso de la tabla anterior en el formulario de revisión.
 - [ ] Declarar en el panel que se envían a terceros la URL (solo con clave de Safe Browsing) y el nombre del dominio (DNS y RDAP).

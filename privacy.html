@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de privacidad · PAGECHECK</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.6; color: #0c4a66; background: #eef9fe; }
+    main { max-width: 760px; margin: 32px auto; padding: 28px 32px; background: #fff; border: 1px solid #cbeaf8; border-radius: 14px; }
+    h1 { font-size: 24px; margin-top: 0; }
+    h2 { font-size: 17px; color: #3aa6d8; margin-top: 28px; }
+    p, li { color: #3c5a68; }
+    code { background: #eef9fe; padding: 1px 5px; border-radius: 4px; }
+    a { color: #3aa6d8; }
+  </style>
+</head>
+<body>
+  <main>
+<h1>Política de privacidad de PAGECHECK</h1>
+<p>Última actualización: 12 de noviembre de 2026</p>
+<p>PAGECHECK es una extensión de Chrome que comprueba la seguridad de la página que tienes abierta en la pestaña activa cuando tú pulsas el botón "Comprobar esta página".</p>
+<h2>Qué datos se procesan</h2>
+<ul>
+<li><strong>Análisis local</strong>: PAGECHECK lee en tu navegador la estructura de la página activa (enlaces, formularios, recursos cargados, título y descripción) y la lista de cookies asociadas a esa web. Este análisis se hace en tu equipo.</li>
+<li><strong>Cabeceras de seguridad</strong>: PAGECHECK solicita la página una vez para leer sus cabeceras de seguridad. No guarda su contenido.</li>
+<li><strong>Clave de API (opcional)</strong>: si la introduces en Opciones, se guarda en el almacenamiento de sincronización de Chrome y solo se usa para consultar Google Safe Browsing.</li>
+</ul>
+<h2>Qué datos se envían a terceros</h2>
+<p>Para completar algunas comprobaciones, PAGECHECK envía datos a los siguientes servicios. Cada uno aplica su propia política de privacidad:</p>
+<ul>
+<li><strong>Google Safe Browsing</strong> (solo si has añadido una clave de API): se envía la dirección completa de la página que analizas, para saber si aparece en las listas de amenazas.</li>
+<li><strong>Google DNS over HTTPS</strong> (dns.google): se envía el nombre del dominio para obtener la dirección IP del servidor.</li>
+<li><strong>RDAP (rdap.org)</strong>: se envía el nombre del dominio para obtener la fecha de registro.</li>
+</ul>
+<ul>
+<li><strong>Lista de URLhaus</strong>: cada 6 horas, PAGECHECK descarga en segundo plano una lista pública de dominios desde GitHub Pages (mirror de curbengh/urlhaus-filter). Esa descarga no contiene datos tuyos. Como con cualquier servidor web, el proveedor de alojamiento puede registrar la dirección IP de la petición según su propia política. La comprobación de tus páginas se hace después en tu equipo, sin enviar la URL a nadie.</li>
+</ul>
+<p>PAGECHECK no envía a estos servicios tu historial de navegación, cookies ni el contenido de las páginas.</p>
+<h2>Qué no hacemos</h2>
+<ul>
+<li>No vendemos datos personales ni los cedemos a terceros con fines de publicidad.</li>
+<li>No usamos los datos para mostrarte anuncios ni para perfilarte.</li>
+<li>No tenemos servidores propios: no almacenamos ningún dato fuera de tu navegador.</li>
+<li>No usamos analítica ni rastreadores dentro de la extensión.</li>
+</ul>
+<h2>Permisos y su uso</h2>
+<ul>
+<li><code>cookies</code>: leer las cookies de la página activa para informarte sobre ellas.</li>
+<li><code>scripting</code>: ejecutar el análisis de la página activa cuando pulsas el botón.</li>
+<li><code>storage</code>: guardar la clave de API opcional en tu navegador.</li>
+<li><code>contentSettings</code>: leer si tu navegador permite ventanas emergentes en la página activa.</li>
+<li><code>alarms</code>: programar la actualización de la lista de URLhaus cada 6 horas.</li>
+<li><code>&lt;all_urls&gt;</code>: necesario para analizar cualquier página que tú decidas comprobar.</li>
+</ul>
+<h2>Tus opciones</h2>
+<p>Puedes eliminar la clave de API desde Opciones en cualquier momento y desinstalar la extensión desde <code>chrome://extensions</code>, lo que borra todos sus datos locales.</p>
+<h2>Contacto</h2>
+<p>Para cualquier consulta sobre esta política, escribe a: noticiasbuenas2024@gmail.com</p>
+  </main>
+</body>
+</html>
